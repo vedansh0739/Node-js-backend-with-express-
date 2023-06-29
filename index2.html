@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    function myFunction() {
+      var inputValue = document.getElementById("myInput").value;
+
+      fetch("http://localhost:3000/a", {
+        method: "POST",
+        body: JSON.stringify({ Val: inputValue }),
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Process the retrieved data and update the HTML
+          displayData1(data);
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the fetch request
+          console.error("Error:", error);
+        });
+    }
+    function displayData1(data) {
+      const dataContainer = document.getElementById("dataContainer");
+      let data1 = [];
+      data.forEach(function (element, index) {
+        data1.push(element.Val);
+      });
+      dataContainer.innerHTML = "Data from backend: " + JSON.stringify(data1);
+    }
+
+    document.addEventListener("DOMContentLoaded", loadData);
+
+    function loadData() {
+      fetch("http://localhost:3000/a")
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          // Process the retrieved data and update the HTML
+          displayData(data);
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the fetch request
+          console.error("Error:", error);
+        });
+    }
+
+    function displayData(data) {
+      const dataContainer = document.getElementById("dataContainer");
+      let data1 = [];
+      data.forEach(function (element, index) {
+        data1.push(element.Val);
+      });
+      dataContainer.innerHTML = "Data from backend: " + JSON.stringify(data1);
+    }
+  </script>
+
+  <head>
+    <title>Button and Input Box Example</title>
+  </head>
+  <body>
+    <div id="dataContainer"></div>
+    <input type="text" id="myInput" placeholder="Enter text" />
+    <button onclick="myFunction()">Click Me</button>
+  </body>
+</html>
