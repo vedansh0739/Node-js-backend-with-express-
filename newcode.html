@@ -1,0 +1,15 @@
+//How do I add elements like `<div>` to this HTML page when I get the to do response 
+
+  <script>
+  function displayData1(data) {
+      const dataContainer = document.getElementById("dataContainer");
+      let data1 = [];
+      dataContainer.innerHTML = "";
+      data.forEach(function (element, index) {
+        var childElement = document.createElement("div");
+        childElement.innerHTML = element.Val;
+        dataContainer.appendChild(childElement);
+      });
+      //dataContainer.innerHTML = "Data from backend: " + data1;
+    }
+  </script>
